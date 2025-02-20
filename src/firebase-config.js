@@ -15,4 +15,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Add your GitHub Pages domain to Firebase Console:
+// 1. Go to Firebase Console
+// 2. Click on Authentication
+// 3. Click on Sign-in method
+// 4. Add domain: aaronherholdt.github.io
+
 export { db }; 
