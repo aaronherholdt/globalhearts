@@ -1,0 +1,908 @@
+/* Base styles with better cross-browser support */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+/* Enable text selection in input fields */
+input, textarea {
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  /* Prevent pull-to-refresh on mobile */
+  overscroll-behavior-y: contain;
+  /* Prevent text size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Improved touch targets for mobile */
+button, 
+.clickable {
+  min-height: 44px; /* iOS minimum touch target size */
+  min-width: 44px;
+  padding: 12px 20px;
+  touch-action: manipulation;
+}
+
+/* Responsive container */
+.game-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Improved media queries */
+@media screen and (max-width: 768px) {
+  .game-container {
+    padding: 15px;
+    border-radius: 0; /* Full width on mobile */
+  }
+
+  button {
+    width: 100%; /* Full width buttons on mobile */
+    margin: 8px 0;
+  }
+
+  .players-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+}
+
+/* Tablet optimizations */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .game-container {
+    padding: 25px;
+    margin: 20px;
+  }
+
+  .players-grid {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on tablet */
+  }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .game-container {
+    background-color: #2d2d2d;
+  }
+
+  input, button {
+    background-color: #3d3d3d;
+    color: #ffffff;
+    border-color: #4d4d4d;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .game-container {
+    box-shadow: none;
+    background: none;
+  }
+
+  button {
+    display: none;
+  }
+}
+
+/* Accessibility improvements */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Focus styles */
+:focus {
+  outline: 3px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Focus visible only when using keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid #007bff;
+  outline-offset: 2px;
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 svg {
+    margin-left: 10px;
+    font-size: 1.5em;
+}
+
+h2 {
+    color: #007bff;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 svg {
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    animation: pulse 0.8s infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    min-width: 200px;
+    touch-action: manipulation;
+}
+
+button svg {
+    margin-left: 8px;
+    font-size: 1em;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:hover, button:focus {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    outline: none;
+}
+
+.emotional-index {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.emotional-index svg {
+    margin-right: 10px;
+    font-size: 1.2em;
+    color: #e74c3c;
+}
+
+.feedback {
+    margin: 15px 0;
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    animation: slideIn 0.5s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.feedback svg {
+    margin-left: 10px;
+    font-size: 1em;
+}
+
+.reflection-space {
+    margin-top: 20px;
+    background-color: #f9e79f;
+    padding: 15px;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in;
+    transition: opacity 0.3s;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.world-insight {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #d5f5e3;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+textarea {
+    width: 80%;
+    max-width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    touch-action: manipulation;
+}
+
+input {
+    width: 60%;
+    max-width: 100%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    touch-action: manipulation;
+}
+
+.leaderboard {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f1c40f;
+    border-radius: 10px;
+    list-style: none;
+}
+
+.leaderboard li {
+    margin: 5px 0;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaderboard li svg {
+    margin-left: 10px;
+    font-size: 1em;
+    color: #e74c3c;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+@keyframes slideIn {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.icon-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.challenge-card {
+    background-color: #dc3545;
+    padding: 12px 25px;
+    margin: 8px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    animation: pulse 0.8s infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    min-width: 200px;
+    touch-action: manipulation;
+}
+
+.challenge-card:hover, .challenge-card:focus {
+    background-color: #c82333;
+    transform: scale(1.05);
+    outline: none;
+}
+
+.challenge-card svg {
+    margin-left: 8px;
+    font-size: 1em;
+}
+
+/* Ensure reflections persist visually if needed */
+.reflection-space {
+    margin-top: 20px;
+    background-color: #f9e79f;
+    padding: 15px;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in;
+    transition: opacity 0.3s;
+}
+
+.reflection-space.hidden {
+    display: none;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    button, .challenge-card {
+        padding: 10px 20px;
+        min-width: 150px;
+        font-size: 1em;
+    }
+
+    textarea, input {
+        width: 90%;
+        max-width: 90%;
+    }
+
+    h1 svg, h2 svg, button svg, .feedback svg, .leaderboard li svg {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 10px;
+    }
+
+    button, .challenge-card {
+        padding: 8px 15px;
+        min-width: 120px;
+        font-size: 0.9em;
+    }
+
+    textarea, input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    h1, h2 {
+        font-size: 1.2em;
+    }
+
+    h1 svg, h2 svg, button svg, .feedback svg, .leaderboard li svg {
+        font-size: 0.8em;
+    }
+}
+
+.community-insights {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.player-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.player-card {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-align: center;
+}
+
+.comparison-results {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.similar-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.similar-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.player-avatar {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.player-role {
+  color: #666;
+  font-style: italic;
+}
+
+.choice-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #27ae60;
+}
+
+.comparison-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.stat-box {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 150px;
+}
+
+.choice-card, .learning-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.learning-card {
+  background-color: #fff3cd;
+}
+
+.learning-card h5 {
+  margin: 0 0 5px 0;
+  color: #856404;
+}
+
+.insight-intro {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.skill-comparison {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px 0;
+}
+
+.skill-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.skill-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skill-bar-container {
+  width: 100%;
+}
+
+.skill-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.skill-value {
+  font-weight: bold;
+}
+
+.bar-background {
+  width: 100%;
+  height: 12px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  transform-origin: left;
+  will-change: width;
+}
+
+.player-skills {
+  margin: 10px 0;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.player-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.player-actions button {
+  padding: 8px 15px;
+  font-size: 0.9em;
+  min-width: auto;
+}
+
+.highest-skill {
+  margin-top: 15px;
+  font-size: 1.2em;
+  color: #e74c3c;
+}
+
+/* ... (keep all existing styles) */
+
+/* Collaborative Challenge */
+.collaborative-challenge {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.team-members {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.team-member .role {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.challenge-description {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.challenge-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.choice-button {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.choice-button:hover {
+  background: #2980b9;
+}
+
+.choice-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.challenge-results {
+  text-align: center;
+}
+
+.feedback {
+  background: #fff3cd;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.team-scores {
+  margin-top: 20px;
+}
+
+.score-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 15px 0;
+}
+
+.score-card {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  min-width: 150px;
+}
+
+.total-team-score {
+  margin-top: 20px;
+  padding: 15px;
+  background: #e8f4f8;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .collaborative-challenge {
+      padding: 15px;
+  }
+
+  .collaborative-challenge h2 {
+      font-size: 1.2em;
+  }
+
+  .collaborative-challenge p {
+      font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .collaborative-challenge {
+      padding: 10px;
+  }
+
+  .collaborative-challenge h2 {
+      font-size: 1em;
+  }
+
+  .collaborative-challenge p {
+      font-size: 0.9em;
+  }
+}
+
+.game-summary {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.score-highlight {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.best-score {
+  border-left: 4px solid #2ecc71;
+}
+
+.worst-score {
+  border-left: 4px solid #e74c3c;
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.player-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.player-card.selected {
+  border: 2px solid #3498db;
+  transform: scale(1.05);
+}
+
+.mini-score {
+  display: inline-block;
+  padding: 3px 8px;
+  margin: 2px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.team-up-button {
+  background: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.team-up-button:hover {
+  background: #2980b9;
+  transform: scale(1.05);
+}
+
+.teammate-suggestions {
+  margin-top: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.suggestion-intro {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.suggested-players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.player-suggestion {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.player-suggestion:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.player-suggestion.selected {
+  border: 2px solid #3498db;
+  background: #ebf5fb;
+}
+
+.compatibility-score {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.complementary-skills {
+  margin-top: 15px;
+}
+
+.skill-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 2px;
+  background: #e8f4f8;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #2980b9;
+}
+
+.teammate-confirmation {
+  margin-top: 20px;
+  padding: 20px;
+  background: #e8f4f8;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.session-invite {
+  background: #e8f4f8;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.invite-link {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  word-break: break-all;
+  font-family: monospace;
+}
+
+.waiting-message {
+  color: #666;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.waiting-message .icon-spin {
+  animation: spin 1s linear infinite;
+}

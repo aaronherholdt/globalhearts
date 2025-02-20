@@ -1,0 +1,1 @@
+// Service worker registration code for offline support 
